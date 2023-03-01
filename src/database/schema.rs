@@ -27,8 +27,4 @@ diesel::table! {
 diesel::joinable!(form_questions -> forms (form_id));
 diesel::joinable!(form_questions -> questions (question_id));
 
-diesel::allow_tables_to_appear_in_same_query!(
-    form_questions,
-    forms,
-    questions,
-);
+diesel::allow_tables_to_appear_in_same_query!(form_questions, forms, questions,);
