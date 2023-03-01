@@ -6,8 +6,6 @@ CREATE TABLE IF NOT EXISTS form_questions (
   CONSTRAINT fk_fquestions_question FOREIGN KEY (question_id) REFERENCES questions(id) ON DELETE CASCADE
 );
 
-SELECT diesel_manage_updated_at('form_questions');
-
 INSERT INTO form_questions (id, form_id, question_id) VALUES 
   (1, 1, 1),
   (2, 1, 2),

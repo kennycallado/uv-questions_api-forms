@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS forms (
   description TEXT
 );
 
-SELECT diesel_manage_updated_at('forms');
 INSERT INTO forms (id, name, description) VALUES 
   (1, 'Form 1', 'Description 1'),
   (2, 'Form 2', 'Description 2'),
