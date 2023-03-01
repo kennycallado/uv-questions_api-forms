@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS form_questions CASCADE;
+-- DROP PUBLICATION IF EXISTS fquestions_pub CASCADE;
