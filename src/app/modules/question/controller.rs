@@ -128,7 +128,12 @@ pub async fn post_create_none(_question: Json<NewQuestion>) -> Status {
 }
 
 #[put("/<id>", data = "<question>", rank = 1)]
-pub async fn put_update_admin(db: Db, _claims: AdminClaims, id: i32, question: Json<NewQuestion>) -> Result<Json<Question>, Status> {
+pub async fn put_update_admin(
+    db: Db,
+    _claims: AdminClaims,
+    id: i32,
+    question: Json<NewQuestion>,
+) -> Result<Json<Question>, Status> {
     let question = question_repository::update(&db, id, question.into_inner()).await;
 
     match question {
@@ -142,7 +147,12 @@ pub async fn put_update_admin(db: Db, _claims: AdminClaims, id: i32, question: J
 }
 
 #[put("/<id>", data = "<question>", rank = 2)]
-pub async fn put_update_coord(db: Db, _claims: CoordClaims, id: i32, question: Json<NewQuestion>) -> Result<Json<Question>, Status> {
+pub async fn put_update_coord(
+    db: Db,
+    _claims: CoordClaims,
+    id: i32,
+    question: Json<NewQuestion>,
+) -> Result<Json<Question>, Status> {
     let question = question_repository::update(&db, id, question.into_inner()).await;
 
     match question {
@@ -156,7 +166,12 @@ pub async fn put_update_coord(db: Db, _claims: CoordClaims, id: i32, question: J
 }
 
 #[put("/<id>", data = "<question>", rank = 3)]
-pub async fn put_update_thera(db: Db, _claims: TheraClaims, id: i32, question: Json<NewQuestion>) -> Result<Json<Question>, Status> {
+pub async fn put_update_thera(
+    db: Db,
+    _claims: TheraClaims,
+    id: i32,
+    question: Json<NewQuestion>,
+) -> Result<Json<Question>, Status> {
     let question = question_repository::update(&db, id, question.into_inner()).await;
 
     match question {
