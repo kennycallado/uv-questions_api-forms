@@ -24,6 +24,10 @@ pub fn routes() -> Vec<rocket::Route> {
         put_update_coord,
         put_update_thera,
         put_update_none,
+        // delete_destroy_admin,
+        // delete_destroy_coord,
+        // delete_destroy_thera,
+        // delete_destroy_none
     ]
 }
 
