@@ -22,7 +22,7 @@ docker build --no-cache --pull --platform linux/arm64 -f ./Dockerfile -t kennyca
 ```
 
 ``` bash
-docker push -a kennycallado/uv-questions_api-users
+docker push -a kennycallado/uv-questions_api-forms
 ```
 
 ## TODO:
