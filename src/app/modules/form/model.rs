@@ -46,7 +46,7 @@ impl From<FormWithQuestions> for NewForm {
     }
 }
 
-#[derive(Debug, Clone, Deserialize, Serialize)]
+#[derive(Debug, Deserialize, Serialize)]
 #[serde(crate = "rocket::serde")]
 pub struct FormWithQuestions {
     pub id: i32,

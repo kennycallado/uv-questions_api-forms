@@ -6,19 +6,21 @@ use crate::database::schema::questions;
 use crate::app::modules::question::model::{NewQuestion, Question};
 
 pub async fn get_all(db: &Db) -> Result<Vec<Question>, diesel::result::Error> {
-    let questions = db
-        .run(move |conn| questions::table.load::<Question>(conn))
-        .await;
+    let result = db
+        .run(move |conn| questions::table.load::<(i32, String, String)>(conn))
+        .await?;
 
-    questions
+    let questions: Vec<Question> = result.into_iter().map(|q| q.into()).collect();
+
+    Ok(questions)
 }
 
 pub async fn get_by_id(db: &Db, id: i32) -> Result<Question, diesel::result::Error> {
     let question = db
-        .run(move |conn| questions::table.find(id).first::<Question>(conn))
-        .await;
+        .run(move |conn| questions::table.find(id).first::<(i32, String, String)>(conn))
+        .await?;
 
-    question
+    Ok(question.into())
 }
 
 pub async fn add(db: &Db, question: NewQuestion) -> Result<Question, diesel::result::Error> {
@@ -26,11 +28,11 @@ pub async fn add(db: &Db, question: NewQuestion) -> Result<Question, diesel::res
         .run(move |conn| {
             diesel::insert_into(questions::table)
                 .values(&question)
-                .get_result(conn)
+                .get_result::<(i32, String, String)>(conn)
         })
-        .await;
+        .await?;
 
-    question
+    Ok(question.into())
 }
 
 pub async fn update(
@@ -42,9 +44,9 @@ pub async fn update(
         .run(move |conn| {
             diesel::update(questions::table.find(id))
                 .set(&question)
-                .get_result(conn)
+                .get_result::<(i32, String, String)>(conn)
         })
-        .await;
+        .await?;
 
-    question
+    Ok(question.into())
 }

@@ -12,17 +12,19 @@ pub async fn get_questions_by_form_id(
     db: &Db,
     form_id: i32,
 ) -> Result<Vec<Question>, diesel::result::Error> {
-    let questions: Vec<Question> = db
+    let result = db
         .run(move |conn| {
             form_questions::table
                 .inner_join(questions::table)
                 .filter(form_questions::form_id.eq(form_id.clone()))
                 .select(questions::all_columns)
-                .load::<Question>(conn)
+                .load::<(i32, String, String)>(conn)
         })
         .await?;
 
-    Ok(questions)
+    let questions: Vec<Question> = result.into_iter().map(|q| q.into()).collect();
+
+    Ok(questions.into())
 }
 
 pub async fn add_questions_to_form(db: &Db, form_id: i32, questions_id: Vec<i32>) -> Result<Vec<Question>, diesel::result::Error> {
